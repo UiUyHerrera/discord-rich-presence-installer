@@ -1,31 +1,31 @@
-# Instalador de Estado de Discord
+# Discord Status installer
 
-Instalador para Windows de [Estado de Discord](https://github.com/UiUyHerrera/discord-rich-presence-desktop). Es una ventana con un botón: revisa qué falta en la compu, lo instala y deja la app lista con sus accesos directos.
+A Windows installer for [Discord Status](https://github.com/UiUyHerrera/discord-rich-presence-desktop). It's a window with one button: it checks what's missing on the computer, installs it and leaves the app ready with its shortcuts.
 
-## Qué hace, en orden
+## What it does, in order
 
-1. Busca `winget`. Sin él no puede seguir y te dice cómo conseguirlo.
-2. Si faltan Git, Python 3.12 o WebView2 Runtime, los instala con `winget`.
-3. Clona la app en `%LOCALAPPDATA%\Programs\EstadoDiscord`. Si ya estaba instalada y abierta, primero la cierra.
-4. Crea un entorno virtual de Python e instala las dependencias ahí, sin tocar el Python del sistema.
-5. Agrega el acceso directo al menú Inicio y, si marcaste la opción, al escritorio.
-6. Si lo pediste, abre la app al terminar.
+1. Looks for `winget`. Without it, it can't go on, and it tells you how to get it.
+2. If Git, Python 3.12 or the WebView2 Runtime are missing, installs them with `winget`.
+3. Clones the app into `%LOCALAPPDATA%\Programs\EstadoDiscord`. If it was already installed and running, it closes it first.
+4. Creates a Python virtual environment and installs the dependencies there, without touching the system Python.
+5. Adds the Start menu shortcut and, if you ticked the option, a desktop one.
+6. If you asked for it, opens the app at the end.
 
-Cada paso se va mostrando en la ventana, así que si algo falla se ve dónde.
+Each step shows up in the window as it runs, so if something fails you can see where.
 
-El instalador no pide ni guarda el token de Discord: eso lo hace la app la primera vez que se abre.
+The installer never asks for or stores the Discord token: the app does that the first time it opens.
 
-## Compilarlo
+## Building it
 
-Está escrito en C# con Windows Forms sobre .NET Framework 4.8, que ya viene con Windows 10 y 11. No hace falta instalar el SDK de .NET:
+It's written in C# with Windows Forms on .NET Framework 4.8, which already ships with Windows 10 and 11. You don't need the .NET SDK:
 
 ```bat
 build.bat
 ```
 
-`build.bat` usa el MSBuild que trae el propio .NET Framework y deja el ejecutable en `bin\DiscordRichPresenceInstaller.exe`.
+`build.bat` uses the MSBuild that comes with .NET Framework and puts the executable in `bin\DiscordRichPresenceInstaller.exe`.
 
-## Archivos
+## Files
 
-- `Program.cs`: la ventana, con el aviso, las opciones y la barra de progreso.
-- `InstallerService.cs`: los pasos de la instalación y los procesos externos (`winget`, `git`, `python`).
+- `Program.cs`: the window, with the warning, the options and the progress bar.
+- `InstallerService.cs`: the install steps and the external processes (`winget`, `git`, `python`).
